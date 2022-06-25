@@ -6,7 +6,7 @@ namespace OpenTribes\Core\Utils;
 
 use Closure;
 
-abstract class Collection implements \Countable, \ArrayAccess, \Iterator
+abstract class Collection implements \Countable, \ArrayAccess, \Iterator, \JsonSerializable
 {
     /**
      * @param array<Collectible> $collection
@@ -93,4 +93,10 @@ abstract class Collection implements \Countable, \ArrayAccess, \Iterator
     {
         return $this->collection;
     }
+
+    function jsonSerialize()
+    {
+        return $this->getElements();
+    }
+
 }
