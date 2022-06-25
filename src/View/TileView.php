@@ -7,7 +7,7 @@ namespace OpenTribes\Core\View;
 use OpenTribes\Core\Entity\Tile;
 use OpenTribes\Core\Utils\Location;
 
-final class TileView
+final class TileView implements \JsonSerializable
 {
     public function __construct(public readonly string $id,public readonly string $data,public readonly Location $location)
     {
@@ -16,4 +16,17 @@ final class TileView
     {
         return new self($tile->getId(),$tile->getData(),$tile->getLocation());
     }
+
+    function jsonSerialize()
+    {
+        return [
+            'id'=>$this->id,
+            'data'=>$this->data,
+            'location'=>[
+                'x'=>$this->location->getX(),
+                'y'=>$this->location->getY(),
+            ]
+        ];
+    }
+
 }
