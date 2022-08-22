@@ -13,9 +13,9 @@ use OpenTribes\Core\View\CityView;
 final class CreateFirstCityUseCase
 {
     public function __construct(
-        private CityRepository $cityRepository,
-        private UserRepository $userRepository,
-        private LocationFinder $locationFinder
+        private readonly CityRepository $cityRepository,
+        private readonly UserRepository $userRepository,
+        private readonly LocationFinder $locationFinder
     ) {
     }
 
