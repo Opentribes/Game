@@ -17,7 +17,7 @@ final class TileView implements \JsonSerializable
         return new self($tile->getId(),$tile->getData(),$tile->getLocation());
     }
 
-    function jsonSerialize()
+    function jsonSerialize():mixed
     {
         return [
             'id'=>$this->id,
