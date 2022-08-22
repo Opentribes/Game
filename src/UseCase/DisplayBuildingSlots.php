@@ -9,10 +9,11 @@ use OpenTribes\Core\Message\DisplayBuildingSlotsMessage;
 use OpenTribes\Core\Repository\BuildingRepository;
 use OpenTribes\Core\View\BuildingView;
 use OpenTribes\Core\View\SlotView;
+use Psr\Log\LoggerInterface;
 
 final class DisplayBuildingSlots
 {
-    public function __construct(private BuildingRepository $buildingRepository)
+    public function __construct(private BuildingRepository $buildingRepository,private LoggerInterface $logger)
     {
     }
 
@@ -24,6 +25,7 @@ final class DisplayBuildingSlots
             $message->getUserName()
         )) {
             $message->enableCityDataOnly();
+            $this->logger->warning('User cannot build city');
             return;
         }
 

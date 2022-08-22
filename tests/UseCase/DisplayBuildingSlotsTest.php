@@ -6,10 +6,12 @@ namespace OpenTribes\Core\Tests\UseCase;
 use OpenTribes\Core\Tests\Mock\Entity\MockBuilding;
 use OpenTribes\Core\Tests\Mock\Message\MockDisplayBuildingSlotsMessage;
 use OpenTribes\Core\Tests\Mock\Repository\MockBuildingRepository;
+use OpenTribes\Core\Tests\TestLogger;
 use OpenTribes\Core\UseCase\DisplayBuildingSlots;
 use OpenTribes\Core\View\BuildingView;
 use OpenTribes\Core\View\SlotView;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\NullLogger;
 
 /**
  * @coversDefaultClass \OpenTribes\Core\UseCase\DisplayBuildingSlots
@@ -19,11 +21,12 @@ final class DisplayBuildingSlotsTest extends TestCase
 
     public function testCanViewSlots(): void
     {
+
         $buildingRepository = new MockBuildingRepository();
 
         $message = new MockDisplayBuildingSlotsMessage();
 
-        $useCase = new DisplayBuildingSlots($buildingRepository);
+        $useCase = new DisplayBuildingSlots($buildingRepository, new NullLogger());
         $useCase->execute($message);
 
         $this->assertNotEmpty($message->getSlots());
@@ -38,7 +41,7 @@ final class DisplayBuildingSlotsTest extends TestCase
 
         $message = new MockDisplayBuildingSlotsMessage();
 
-        $useCase = new DisplayBuildingSlots($buildingRepository);
+        $useCase = new DisplayBuildingSlots($buildingRepository, new NullLogger());
         $useCase->execute($message);
         /** @var SlotView $firstSlot */
         $firstSlot = $message->getSlots()->first();
@@ -54,7 +57,7 @@ final class DisplayBuildingSlotsTest extends TestCase
 
         $message = new MockDisplayBuildingSlotsMessage(2);
 
-        $useCase = new DisplayBuildingSlots($buildingRepository);
+        $useCase = new DisplayBuildingSlots($buildingRepository, new NullLogger());
         $useCase->execute($message);
 
         $this->assertTrue($message->showOnlyCityData());
