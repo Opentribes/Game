@@ -17,7 +17,7 @@ interface City extends Collectible
 
     public function setBuildings(BuildingCollection $buildings): void;
 
-    public function getUser(): User;
+    public function getUser(): ?User;
 
     public function setUser(User $user): void;
 }
