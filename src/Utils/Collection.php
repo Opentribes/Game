@@ -94,7 +94,8 @@ abstract class Collection implements \Countable, \ArrayAccess, \Iterator, \JsonS
         return $this->collection;
     }
 
-    function jsonSerialize()
+
+    function jsonSerialize(): mixed
     {
         return $this->getElements();
     }
